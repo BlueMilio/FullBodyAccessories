@@ -20,8 +20,8 @@ namespace FullBodyAccessories.Categories
 
         public void Register(params int[] itemType)
         {
-            for (int i = 0; i < itemType.Length; i++)
-                _allowedItems.Add(itemType[i]);
+            foreach(int type in itemType)
+                _allowedItems.Add(type);
         }
 
 

@@ -2,9 +2,9 @@
 
 namespace FullBodyAccessories.Categories
 {
-    public sealed class RingsCategory : Category
+    public sealed class RingCategory : Category
     {
-        public RingsCategory() : base("Rings")
+        public RingCategory() : base("Ring")
         {
             Register(CoinRing, DiamondRing, GoldRing, GreedyRing);
             Register(FleshKnuckles);
