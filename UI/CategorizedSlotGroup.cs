@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.Localization;
 using Terraria.UI;
 
-namespace FullBodyAccessories
+namespace FullBodyAccessories.UI
 {
     public class CategorizedSlotGroup
     {
