@@ -10,9 +10,10 @@ namespace FullBodyAccessories.Categories
         private readonly List<int> _allowedItems = new List<int>();
 
 
-        public Category(string name)
+        public Category(string name, string displayName = "")
         {
             Name = name;
+            DisplayName = string.IsNullOrEmpty(displayName) ? name : displayName;
         }
 
 
@@ -32,6 +33,7 @@ namespace FullBodyAccessories.Categories
 
 
         public string Name { get; }
+        public string DisplayName { get; }
 
         public int[] AllowedItems => _allowedItems.ToArray();
 

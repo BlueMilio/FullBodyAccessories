@@ -4,7 +4,7 @@ namespace FullBodyAccessories.Categories
 {
     public sealed class ArmCategory : Category
     {
-        public ArmCategory() : base("Arm")
+        public ArmCategory() : base("Arm", "Arms")
         {
             Register(AnkhShield, CobaltShield, EoCShield, HuntressBuckler, ObsidianShield, PaladinsShield, SquireShield);
             Register( BalloonHorseshoeFart, BalloonHorseshoeHoney, BalloonHorseshoeSharkron, BalloonPufferfish, BlizzardinaBalloon, 

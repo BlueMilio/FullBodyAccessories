@@ -4,7 +4,7 @@ namespace FullBodyAccessories.Categories
 {
     public sealed class FootCategory : Category
     {
-        public FootCategory() : base("Foot")
+        public FootCategory() : base("Foot", "Feet")
         {
             Register(AnkletoftheWind);
             Register(Flipper);

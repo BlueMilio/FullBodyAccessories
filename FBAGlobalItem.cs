@@ -17,7 +17,7 @@ namespace FullBodyAccessories
 
             Category category = categoryLoader.ItemCategory(item);
 
-            tooltips.Add(new TooltipLine(mod, "FBA_CATEGORY", '[' + category.Name + ']')
+            tooltips.Add(new TooltipLine(mod, "FBA_CATEGORY", '[' + category.DisplayName + ']')
             {
                 // TODO Change color.
                 overrideColor = Color.Blue
