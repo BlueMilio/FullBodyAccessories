@@ -41,7 +41,7 @@ namespace FullBodyAccessories.UI
             string social = Language.GetTextValue("Social");
             Vector2 equipSize = Main.fontMouseText.MeasureString(equip);
 
-            static void onMouseOver(UIMouseEvent evt, UIElement element)
+            void onMouseOver(UIMouseEvent evt, UIElement element)
             {
                 if (element is UIText text && text.TextColor != Color.White)
                 {
@@ -49,7 +49,7 @@ namespace FullBodyAccessories.UI
                 }
             }
 
-            static void onMouseOut(UIMouseEvent evt, UIElement element)
+            void onMouseOut(UIMouseEvent evt, UIElement element)
             {
                 if (element is UIText text && text.TextColor != Color.White)
                 {
