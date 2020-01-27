@@ -9,6 +9,9 @@ namespace FullBodyAccessories.UI
     {
         private const int SlotMargin = 6;
 
+        public const int DefaultX = 200;
+        public const int DefaultY = 300;
+
         public DraggableUIPanel Panel { get; private set; }
         public UITabGroup Tabs { get; private set; }
 
@@ -70,8 +73,8 @@ namespace FullBodyAccessories.UI
             RightFootGroup = new CategorizedSlotGroup(
                 x += slotOffset, y, new FootCategory(), CategorizedSlotGroup.Side.Right);
 
-            Panel.Left.Set(500, 0);
-            Panel.Top.Set(300, 0);
+            Panel.Left.Set(DefaultX, 0);
+            Panel.Top.Set(DefaultY, 0);
             Panel.Width.Set(slotOffset * 3 + Panel.PaddingLeft + Panel.PaddingRight, 0);
             Panel.Height.Set(slotOffset * 4 + Tabs.Height.Pixels /*equipSize.Y*/ + Panel.PaddingTop + Panel.PaddingBottom, 0);
 
