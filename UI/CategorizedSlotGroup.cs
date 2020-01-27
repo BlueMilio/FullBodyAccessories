@@ -2,6 +2,7 @@
 using FullBodyAccessories.Categories;
 using Terraria;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FullBodyAccessories.UI
@@ -26,19 +27,25 @@ namespace FullBodyAccessories.UI
 
             bool IsValidItem(Item item)
             {
-                return Category.Has(item) && (item.modItem == null || item.modItem is IFBAAccessory acc && acc.IsValidItem(this));
+                return Category.Has(item) && (item.modItem == null 
+                                              || item.modItem is IFBAAccessory acc && acc.IsValidItem(this));
             };
 
             string sideText = side == Side.None ? "" : side.ToString();
+            FBAMod mod = ModContent.GetInstance<FBAMod>();
+            CroppedTexture2D emptyTexture = new CroppedTexture2D(mod.GetTexture($"Textures/{sideText}{category.Name}"), 
+                                                                 CustomItemSlot.DefaultColors.EmptyTexture);
 
             Slot = new CustomItemSlot(ItemSlot.Context.EquipAccessory)
             {
+                EmptyTexture = emptyTexture,
                 HoverText = Language.GetTextValue($"Mods.FullBodyAccessories.{sideText}{Category.Name}"),
                 IsValidItem = IsValidItem
             };
 
             SocialSlot = new CustomItemSlot(ItemSlot.Context.EquipAccessoryVanity)
             {
+                EmptyTexture = emptyTexture,
                 HoverText = Language.GetTextValue($"Mods.FullBodyAccessories.Social{sideText}{Category.Name}"),
                 IsValidItem = IsValidItem
             };
