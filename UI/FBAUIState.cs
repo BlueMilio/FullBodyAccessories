@@ -76,7 +76,7 @@ namespace FullBodyAccessories.UI
             Panel.Left.Set(DefaultX, 0);
             Panel.Top.Set(DefaultY, 0);
             Panel.Width.Set(slotOffset * 3 + Panel.PaddingLeft + Panel.PaddingRight, 0);
-            Panel.Height.Set(slotOffset * 4 + Tabs.Height.Pixels /*equipSize.Y*/ + Panel.PaddingTop + Panel.PaddingBottom, 0);
+            Panel.Height.Set(slotOffset * 4 + Tabs.Height.Pixels + Panel.PaddingTop + Panel.PaddingBottom, 0);
 
             Append(Panel);
             AppendAllCategories(0);
