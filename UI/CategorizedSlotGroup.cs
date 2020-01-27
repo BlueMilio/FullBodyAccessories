@@ -24,10 +24,9 @@ namespace FullBodyAccessories.UI
         {
             Category = category;
 
-            bool isValidItem(Item item)
+            bool IsValidItem(Item item)
             {
-                // TODO: custom IsValidItem for each item
-                return Category.Has(item);
+                return Category.Has(item) && (item.modItem == null || item.modItem is IFBAAccessory acc && acc.IsValidItem(this));
             };
 
             string sideText = side == Side.None ? "" : side.ToString();
@@ -35,13 +34,15 @@ namespace FullBodyAccessories.UI
             Slot = new CustomItemSlot(ItemSlot.Context.EquipAccessory)
             {
                 HoverText = Language.GetTextValue($"Mods.FullBodyAccessories.{sideText}{Category.Name}"),
-                IsValidItem = isValidItem
+                IsValidItem = IsValidItem
             };
+
             SocialSlot = new CustomItemSlot(ItemSlot.Context.EquipAccessoryVanity)
             {
                 HoverText = Language.GetTextValue($"Mods.FullBodyAccessories.Social{sideText}{Category.Name}"),
-                IsValidItem = isValidItem
+                IsValidItem = IsValidItem
             };
+
             DyeSlot = new CustomItemSlot(ItemSlot.Context.EquipDye)
             {
                 IsValidItem = item => item.dye > 0

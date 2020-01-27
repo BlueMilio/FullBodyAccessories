@@ -12,6 +12,7 @@ namespace FullBodyAccessories
         private UserInterface _slotInterface;
         public FBAUIState SlotUI;
 
+
         public override void Load()
         {
             if (!Main.dedServ)
@@ -22,6 +23,11 @@ namespace FullBodyAccessories
                 SlotUI.Activate();
                 _slotInterface.SetState(SlotUI);
             }
+        }
+
+        public override object Call(params object[] args)
+        {
+            if (args[0] is string cmdName)
         }
 
         public override void UpdateUI(GameTime gameTime)
