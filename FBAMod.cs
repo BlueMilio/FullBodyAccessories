@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using FullBodyAccessories.Categories;
 using FullBodyAccessories.UI;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -7,10 +9,16 @@ using Terraria.UI;
 
 namespace FullBodyAccessories
 {
-	public class FBAMod : Mod
+    public class FBAMod : Mod
     {
         private UserInterface _slotInterface;
         public FBAUIState SlotUI;
+
+
+        public FBAMod()
+        {
+            Instance = this;
+        }
 
 
         public override void Load()
@@ -25,9 +33,56 @@ namespace FullBodyAccessories
             }
         }
 
+        public override void Unload()
+        {
+            Instance = null;
+        }
+
+
         public override object Call(params object[] args)
         {
-            if (args[0] is string cmdName)
+            if (!(args[0] is string cmdName))
+                throw new Exception("Invalid Call: first parameter must be a string.");
+
+
+            cmdName = cmdName.ToLower();
+
+
+            if (cmdName.Equals("additem"))
+            {
+                if (args.Length < 3)
+                    throw new ArgumentException("Format is \"additem\" \"category name\" itemType [option: Predicate<Item>, item => ... condition here]");
+
+
+                if (args.Length < 2 || !(args[1] is string categoryName))
+                    throw new ArgumentException("Second argument must be the name of the category.");
+
+                if (!CategoryLoader.Instance.HasCategory(categoryName))
+                    throw new ArgumentException($"Category \"{categoryName}\" not found.");
+
+
+                Category category = CategoryLoader.Instance.ItemCategory(categoryName);
+
+
+                if (args.Length < 3 || !(args[2] is int itemType))
+                    throw new ArgumentException("Third argument must be a item type (integer).");
+
+                if (ModContent.GetModItem(itemType) == default)
+                    throw new ArgumentException($"No item for type {itemType}.");
+
+
+                category.Register(itemType);
+
+                if (args.Length >= 4)
+                {
+                    if (!(args[3] is Predicate<Item> predicate))
+                        throw new ArgumentException("Fourth argument must be a predicate.");
+
+                    WeakItemConditions.Add(itemType, predicate);
+                }
+            }
+
+            return default;
         }
 
         public override void UpdateUI(GameTime gameTime)
@@ -58,5 +113,10 @@ namespace FullBodyAccessories
                     InterfaceScaleType.UI));
             }
         }
-	}
+
+
+        public static FBAMod Instance { get; private set; }
+
+        internal Dictionary<int, Predicate<Item>> WeakItemConditions { get; } = new Dictionary<int, Predicate<Item>>();
+    }
 }

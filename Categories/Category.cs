@@ -10,14 +10,16 @@ namespace FullBodyAccessories.Categories
         private readonly List<int> _allowedItems = new List<int>();
 
 
-        public Category(string name, string displayName = "")
+        public Category(string name, string displayName = default)
         {
             Name = name;
-            DisplayName = string.IsNullOrEmpty(displayName) ? name : displayName;
+            DisplayName = string.IsNullOrWhiteSpace(displayName) ? name : displayName;
         }
 
 
         public void Register<T>() where T : ModItem => Register(ModContent.ItemType<T>());
+        public void Register(ModItem modItem) => Register(modItem.item);
+        public void Register(Item item) => Register(item.type);
 
         public void Register(params int[] itemType)
         {

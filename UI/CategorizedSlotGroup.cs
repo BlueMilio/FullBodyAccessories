@@ -1,4 +1,6 @@
-﻿using CustomSlot;
+﻿using System;
+using System.Collections.Generic;
+using CustomSlot;
 using FullBodyAccessories.Categories;
 using Terraria;
 using Terraria.Localization;
@@ -27,9 +29,12 @@ namespace FullBodyAccessories.UI
 
             bool IsValidItem(Item item)
             {
-                return Category.Has(item) && (item.modItem == null 
-                                              || item.modItem is IFBAAccessory acc && acc.IsValidItem(this));
+                Dictionary<int, Predicate<Item>> weakItemConditions = FBAMod.Instance.WeakItemConditions;
+
+                return Category.Has(item) && (!weakItemConditions.ContainsKey(item.type) || weakItemConditions[item.type](item)) && 
+                       (item.modItem == null || item.modItem is IFBAAccessory acc && acc.IsValidItem(this));
             };
+
 
             string sideText = side == Side.None ? "" : side.ToString();
             FBAMod mod = ModContent.GetInstance<FBAMod>();
@@ -54,6 +59,7 @@ namespace FullBodyAccessories.UI
             {
                 IsValidItem = item => item.dye > 0
             };
+
 
             Slot.Left.Set(x, 0);
             SocialSlot.Left.Set(x, 0);
