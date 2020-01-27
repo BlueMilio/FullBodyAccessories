@@ -43,8 +43,6 @@ namespace FullBodyAccessories.UI
 
             Left.Set(end.X - _offset.X, 0);
             Top.Set(end.Y - _offset.Y, 0);
-
-            Recalculate();
         }
 
         public override void Update(GameTime gameTime)
@@ -60,7 +58,6 @@ namespace FullBodyAccessories.UI
             {
                 Left.Set(Main.mouseX - _offset.X, 0);
                 Top.Set(Main.mouseY - _offset.Y, 0);
-                Recalculate();
             }
 
             Rectangle parentDimensions = Parent.GetDimensions().ToRectangle();
@@ -69,7 +66,6 @@ namespace FullBodyAccessories.UI
             {
                 Left.Pixels = Utils.Clamp(Left.Pixels, 0, parentDimensions.Right - Width.Pixels);
                 Top.Pixels = Utils.Clamp(Top.Pixels, 0, parentDimensions.Bottom - Height.Pixels);
-                Recalculate();
             }
         }
     }
