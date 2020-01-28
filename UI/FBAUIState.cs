@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using FullBodyAccessories.Categories;
-using Terraria;
+﻿using Terraria;
 using Terraria.Localization;
 using Terraria.UI;
 
@@ -13,7 +11,7 @@ namespace FullBodyAccessories.UI
         public const int DefaultX = 200;
         public const int DefaultY = 300;
 
-        public DraggableUIPanel Panel { get; private set; }
+        public CustomUIPanel Panel { get; private set; }
         public UITabGroup Tabs { get; private set; }
         public CategorizedSlotGroup[] SlotGroups { get; private set; }
 
@@ -25,7 +23,7 @@ namespace FullBodyAccessories.UI
             int slotSize = Main.inventoryBackTexture.Width;
             int slotOffset = slotSize + SlotMargin;
 
-            Panel = new DraggableUIPanel();
+            Panel = new CustomUIPanel();
 
             // create the buttons to change equipment type
             Tabs = new UITabGroup(new[]
