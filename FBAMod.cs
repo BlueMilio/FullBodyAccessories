@@ -14,6 +14,15 @@ namespace FullBodyAccessories
         private UserInterface _slotInterface;
         public FBAUIState SlotUI;
 
+        // TODO: webmilio fix to use CategoryLoader
+        public static ArmCategory ArmCategory { get; } = new ArmCategory();
+        public static BackCategory BackCategory { get; } = new BackCategory();
+        public static FootCategory FootCategory { get; } = new FootCategory();
+        public static HeadAltCategory HeadAltCategory { get; } = new HeadAltCategory();
+        public static HeadCategory HeadCategory { get; } = new HeadCategory();
+        public static NeckCategory NeckCategory { get; } = new NeckCategory();
+        public static RingCategory RingCategory { get; } = new RingCategory();
+        public static WaistCategory WaistCategory { get; } = new WaistCategory();
 
         public FBAMod()
         {
