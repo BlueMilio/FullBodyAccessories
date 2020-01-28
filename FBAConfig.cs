@@ -8,7 +8,7 @@ namespace FullBodyAccessories
     {
         private bool firstLoad = true;
 
-        public static FBAConfig Instance = null;
+        public static FBAConfig Instance;
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
         [DefaultValue(false)]
@@ -16,12 +16,7 @@ namespace FullBodyAccessories
                  "Click \"Save Config\" to see changes")]
         [Label("Reset mod settings")]
         public bool ResetSettings;
-
-        public override void OnLoaded()
-        {
-            Instance = this;
-        }
-
+        
         public override void OnChanged()
         {
             if (firstLoad)
