@@ -1,5 +1,4 @@
 ﻿using FullBodyAccessories.UI;
-using Terraria.ModLoader;
 
 namespace FullBodyAccessories
 {
