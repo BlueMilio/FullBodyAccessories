@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -23,8 +24,18 @@ namespace FullBodyAccessories.Categories
 
         public void Register(params int[] itemType)
         {
-            foreach(int type in itemType)
-                _allowedItems.Add(type);
+            _allowedItems.AddRange(itemType);
+        }
+
+
+        public void Unregister<T>() where T : ModItem => Unregister(ModContent.ItemType<T>());
+        public void Unregister(ModItem modItem) => Unregister(modItem.item);
+        public void Unregister(Item item) => Unregister(item.type);
+
+        public void Unregister(params int[] itemType)
+        {
+            var itemTypeList = itemType.ToList();
+            _allowedItems.RemoveAll(t => itemTypeList.Contains(t));
         }
 
 
