@@ -1,4 +1,5 @@
-﻿using FullBodyAccessories.Categories;
+﻿using System.Linq;
+using FullBodyAccessories.Categories;
 using Terraria;
 using Terraria.Localization;
 using Terraria.UI;
@@ -14,24 +15,13 @@ namespace FullBodyAccessories.UI
 
         public DraggableUIPanel Panel { get; private set; }
         public UITabGroup Tabs { get; private set; }
-
-        public CategorizedSlotGroup BackGroup { get; private set; }
-        public CategorizedSlotGroup HeadGroup { get; private set; }
-        public CategorizedSlotGroup LeftArmGroup { get; private set; }
-        public CategorizedSlotGroup NeckGroup { get; private set; }
-        public CategorizedSlotGroup RightArmGroup { get; private set; }
-        public CategorizedSlotGroup LeftRingGroup { get; private set; }
-        public CategorizedSlotGroup WaistGroup { get; private set; }
-        public CategorizedSlotGroup RightRingGroup { get; private set; }
-        public CategorizedSlotGroup LeftFootGroup { get; private set; }
-        public CategorizedSlotGroup RightFootGroup { get; private set; }
+        public CategorizedSlotGroup[] SlotGroups { get; private set; }
 
         public bool Visible => Main.playerInventory;
 
         public override void OnInitialize()
         {
             int x = 0;
-            int y = 0;
             int slotSize = Main.inventoryBackTexture.Width;
             int slotOffset = slotSize + SlotMargin;
 
@@ -44,53 +34,52 @@ namespace FullBodyAccessories.UI
             });
             Tabs.OnSelectedIndexChanged += (evt, lastTab, currentTab) =>
             {
-                AppendAllCategories(currentTab);
+                AppendToPanel(currentTab);
             };
             Panel.Append(Tabs);
 
-            y = (int)Tabs.Height.Pixels;
+            int y = (int)Tabs.Height.Pixels;
 
             // create the equipment slot groups
-            // TODO: replace new Category() calls with more accessible variables
-            BackGroup = new CategorizedSlotGroup(
-                x, y, new BackCategory(), CategorizedSlotGroup.Side.None);
-            HeadGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new HeadCategory(), CategorizedSlotGroup.Side.None);
-            LeftArmGroup = new CategorizedSlotGroup(
-                x -= slotOffset, y += slotOffset, new ArmCategory(), CategorizedSlotGroup.Side.Left);
-            NeckGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new NeckCategory(), CategorizedSlotGroup.Side.None);
-            RightArmGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new ArmCategory(), CategorizedSlotGroup.Side.Right);
-            LeftRingGroup = new CategorizedSlotGroup(
-                x -= slotOffset * 2, y += slotOffset, new RingCategory(), CategorizedSlotGroup.Side.Left);
-            WaistGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new WaistCategory(), CategorizedSlotGroup.Side.None);
-            RightRingGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new RingCategory(), CategorizedSlotGroup.Side.Right);
-            LeftFootGroup = new CategorizedSlotGroup(
-                x -= slotOffset * 2 - (slotSize / 2), y += slotOffset, new FootCategory(), CategorizedSlotGroup.Side.Left);
-            RightFootGroup = new CategorizedSlotGroup(
-                x += slotOffset, y, new FootCategory(), CategorizedSlotGroup.Side.Right);
+            SlotGroups = new[]
+            {
+                // back
+                new CategorizedSlotGroup(x, y, FBAMod.BackCategory, CategorizedSlotGroup.Side.None), 
+                // head
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.HeadCategory, CategorizedSlotGroup.Side.None), 
+                // left arm
+                new CategorizedSlotGroup(x -= slotOffset, y += slotOffset, FBAMod.ArmCategory, 
+                                         CategorizedSlotGroup.Side.Left),
+                // neck
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.NeckCategory, CategorizedSlotGroup.Side.None), 
+                // right arm
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.ArmCategory, CategorizedSlotGroup.Side.Right), 
+                // left ring
+                new CategorizedSlotGroup(x -= slotOffset * 2, y += slotOffset, FBAMod.RingCategory, 
+                                         CategorizedSlotGroup.Side.Left),
+                // waist
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.WaistCategory, CategorizedSlotGroup.Side.None), 
+                // right ring
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.RingCategory, CategorizedSlotGroup.Side.Right), 
+                // left foot
+                new CategorizedSlotGroup(x -= slotOffset * 2 - (slotSize / 2), y += slotOffset, FBAMod.FootCategory,
+                                         CategorizedSlotGroup.Side.Left), 
+                // right foot
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.FootCategory, CategorizedSlotGroup.Side.Right)
+            };
 
             Panel.Left.Set(DefaultX, 0);
             Panel.Top.Set(DefaultY, 0);
             Panel.Width.Set(slotOffset * 3 + Panel.PaddingLeft + Panel.PaddingRight, 0);
             Panel.Height.Set(slotOffset * 4 + Tabs.Height.Pixels + Panel.PaddingTop + Panel.PaddingBottom, 0);
 
+            AppendToPanel(0);
             Append(Panel);
-            AppendAllCategories(0);
         }
 
-        private void AppendAllCategories(int tab)
+        private void AppendToPanel(int tab)
         {
-            AppendToPanel(tab, BackGroup, HeadGroup, LeftArmGroup, NeckGroup, RightArmGroup, LeftRingGroup,
-                          WaistGroup, RightRingGroup, LeftFootGroup, RightFootGroup);
-        }
-
-        private void AppendToPanel(int tab, params CategorizedSlotGroup[] groups)
-        {
-            foreach (CategorizedSlotGroup group in groups)
+            foreach (CategorizedSlotGroup group in SlotGroups)
             {
                 if (tab == 0)
                 {
