@@ -12,6 +12,26 @@ namespace FullBodyAccessories.Players
             XPositionTag = "XPosition",
             YPositionTag = "YPosition";
 
+        public override void UpdateEquips(ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff)
+        {
+            FBAUIState ui = ((FBAMod)mod).SlotUI;
+
+            foreach (CategorizedSlotGroup group in ui.SlotGroups)
+            {
+                if (group.Slot.Item.stack > 0)
+                {
+                    player.VanillaUpdateAccessory(player.whoAmI, group.Slot.Item, !group.Slot.ItemVisible,
+                                                  ref wallSpeedBuff, ref tileSpeedBuff, ref tileRangeBuff);
+                    player.VanillaUpdateEquip(group.Slot.Item);
+                }
+
+                if (group.SocialSlot.Item.stack > 0)
+                {
+                    player.VanillaUpdateVanityAccessory(group.SocialSlot.Item);
+                }
+            }
+        }
+
         public override TagCompound Save()
         {
             FBAUIState ui = ((FBAMod)mod).SlotUI;
