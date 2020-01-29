@@ -20,7 +20,7 @@ namespace FullBodyAccessories
             tooltips.Add(new TooltipLine(mod, "FBA_CATEGORY", '[' + category.DisplayName + ']')
             {
                 // TODO Change color.
-                overrideColor = Color.Blue
+                overrideColor = Color.LightSkyBlue
             });
         }
     }
