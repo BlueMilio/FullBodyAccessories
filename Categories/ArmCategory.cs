@@ -7,10 +7,11 @@ namespace FullBodyAccessories.Categories
         public ArmCategory() : base("Arm", "Arms")
         {
             Register(AnkhShield, CobaltShield, EoCShield, HuntressBuckler, ObsidianShield, PaladinsShield, SquireShield);
-            Register( BalloonHorseshoeFart, BalloonHorseshoeHoney, BalloonHorseshoeSharkron, BalloonPufferfish, BlizzardinaBalloon, 
-                BlueHorseshoeBalloon, BundleofBalloons, CloudinaBalloon, FartInABalloon, HoneyBalloon, PartyBundleOfBalloonsAccessory, SandstorminaBalloon, 
-                SharkronBalloon, ShinyRedBalloon, WhiteHorseshoeBalloon, YellowHorseshoeBalloon);
-            Register(BandofRegeneration, BandofStarpower);
+            Register(BalloonHorseshoeFart, BalloonHorseshoeHoney, BalloonHorseshoeSharkron, BalloonPufferfish,
+                     BlizzardinaBalloon, BlueHorseshoeBalloon, BundleofBalloons, CloudinaBalloon, FartInABalloon,
+                     HoneyBalloon, PartyBundleOfBalloonsAccessory, SandstorminaBalloon, SharkronBalloon,
+                     ShinyRedBalloon, WhiteHorseshoeBalloon, YellowHorseshoeBalloon);
+            Register(BandofRegeneration, BandofStarpower, ManaRegenerationBand);
             Register(CelestialCuffs, MagicCuffs);
             Register(CharmofMyths);
             Register(ClimbingClaws);
