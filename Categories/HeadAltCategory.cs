@@ -7,8 +7,10 @@ namespace FullBodyAccessories.Categories
         public HeadAltCategory() : base("Head-Alt")
         {
             Register(AnglerEarring);
-            Register(AngelHalo);
             Register(NaturesGift, ObsidianRose);
+
+            // Vanity
+            Register(AngelHalo);
         }
     }
 }
