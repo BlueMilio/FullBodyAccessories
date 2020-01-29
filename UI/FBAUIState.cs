@@ -42,28 +42,28 @@ namespace FullBodyAccessories.UI
             SlotGroups = new[]
             {
                 // back
-                new CategorizedSlotGroup(x, y, FBAMod.BackCategory, CategorizedSlotGroup.Side.None), 
+                new CategorizedSlotGroup(x, y, FBAMod.BackCategory, CategorizedSlotGroup.PanelSide.None), 
                 // head
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.HeadCategory, CategorizedSlotGroup.Side.None), 
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.HeadCategory, CategorizedSlotGroup.PanelSide.None), 
                 // left arm
                 new CategorizedSlotGroup(x -= slotOffset, y += slotOffset, FBAMod.ArmCategory, 
-                                         CategorizedSlotGroup.Side.Left),
+                                         CategorizedSlotGroup.PanelSide.Left),
                 // neck
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.NeckCategory, CategorizedSlotGroup.Side.None), 
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.NeckCategory, CategorizedSlotGroup.PanelSide.None), 
                 // right arm
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.ArmCategory, CategorizedSlotGroup.Side.Right), 
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.ArmCategory, CategorizedSlotGroup.PanelSide.Right), 
                 // left ring
                 new CategorizedSlotGroup(x -= slotOffset * 2, y += slotOffset, FBAMod.RingCategory, 
-                                         CategorizedSlotGroup.Side.Left),
+                                         CategorizedSlotGroup.PanelSide.Left),
                 // waist
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.WaistCategory, CategorizedSlotGroup.Side.None), 
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.WaistCategory, CategorizedSlotGroup.PanelSide.None), 
                 // right ring
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.RingCategory, CategorizedSlotGroup.Side.Right), 
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.RingCategory, CategorizedSlotGroup.PanelSide.Right), 
                 // left foot
                 new CategorizedSlotGroup(x -= slotOffset * 2 - (slotSize / 2), y += slotOffset, FBAMod.FootCategory,
-                                         CategorizedSlotGroup.Side.Left), 
+                                         CategorizedSlotGroup.PanelSide.Left), 
                 // right foot
-                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.FootCategory, CategorizedSlotGroup.Side.Right)
+                new CategorizedSlotGroup(x += slotOffset, y, FBAMod.FootCategory, CategorizedSlotGroup.PanelSide.Right)
             };
 
             Panel.Left.Set(DefaultX, 0);
