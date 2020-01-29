@@ -12,6 +12,44 @@ namespace FullBodyAccessories.Players
             XPositionTag = "XPosition",
             YPositionTag = "YPosition";
 
+        public override void ModifyDrawInfo(ref PlayerDrawInfo drawInfo)
+        {
+            FBAUIState ui = ((FBAMod)mod).SlotUI;
+
+            foreach (CategorizedSlotGroup group in ui.SlotGroups)
+            {
+                switch (group.Category)
+                {
+                    case ArmCategory _:
+
+                        break;
+                    case BackCategory _:
+
+                        break;
+                    case FootCategory _:
+
+                        break;
+                    case HeadCategory _:
+
+                    case HeadAltCategory _:
+
+                        break;
+                    case NeckCategory _:
+
+                        break;
+                    case RingCategory _:
+
+                        break;
+                    case WaistCategory _:
+                        if (HasDye(group))
+                        {
+                            drawInfo.waistShader = group.DyeSlot.Item.dye;
+                        }
+                        break;
+                }
+            }
+        }
+
         public override void UpdateEquips(ref bool wallSpeedBuff, ref bool tileSpeedBuff, ref bool tileRangeBuff)
         {
             FBAUIState ui = ((FBAMod)mod).SlotUI;
@@ -57,6 +95,12 @@ namespace FullBodyAccessories.Players
             ui.Panel.Top.Set(tag.GetFloat(YPositionTag), 0);
 
             ui.SlotGroups.ToList().ForEach(g => g.Load(tag));
+        }
+
+        private static bool HasDye(CategorizedSlotGroup group)
+        {
+            return group.DyeSlot.Item.stack > 0
+                   && (group.Slot.Item.stack > 0 || group.SocialSlot.Item.stack > 0);
         }
     }
 }
