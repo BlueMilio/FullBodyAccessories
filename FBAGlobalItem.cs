@@ -23,5 +23,15 @@ namespace FullBodyAccessories
                 overrideColor = Color.LightSkyBlue
             });
         }
+
+        public override bool CanEquipAccessory(Item item, Player player, int slot)
+        {
+            var categoryLoader = CategoryLoader.Instance;
+
+            if (!categoryLoader.HasCategory(item))
+                return true;
+
+            return slot == 0;
+        }
     }
 }

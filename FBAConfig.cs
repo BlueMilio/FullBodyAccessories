@@ -6,7 +6,6 @@ namespace FullBodyAccessories
 {
     public class FBAConfig : ModConfig
     {
-        public static FBAConfig Instance;
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
         [DefaultValue(false)]
@@ -15,11 +14,10 @@ namespace FullBodyAccessories
 
         public override void OnChanged()
         {
-            FBAUIState ui = ((FBAMod)mod).SlotUI;
+            var ui = FBAMod.Instance.SlotUI;
+            if (ui == default) return;
 
-            if (ui == null) return;
-
-            ((FBAMod)mod).SlotUI.Panel.Visible = !HidePanel;
+            ui.Panel.Visible = !HidePanel;
         }
     }
 }

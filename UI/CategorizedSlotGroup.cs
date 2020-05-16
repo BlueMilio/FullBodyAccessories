@@ -19,16 +19,13 @@ namespace FullBodyAccessories.UI
             Right
         }
 
-        private string VisibleTag => $"{GetTagPrefix()}Visible";
-        private string ItemTag => $"{GetTagPrefix()}Item";
-        private string SocialTag => $"{GetTagPrefix()}Social";
-        private string DyeTag => $"{GetTagPrefix()}Dye";
+        public enum SlotId
+        {
+            Equip,
+            Social,
+            Dye
+        }
 
-        public Category Category { get; }
-        public CustomItemSlot Slot { get; }
-        public CustomItemSlot SocialSlot { get; }
-        public CustomItemSlot DyeSlot { get; }
-        public PanelSide Side { get; }
 
         public CategorizedSlotGroup(int x, int y, Category category, PanelSide side)
         {
@@ -44,8 +41,7 @@ namespace FullBodyAccessories.UI
             };
 
             string sideText = Side == PanelSide.None ? "" : Side.ToString();
-            FBAMod mod = ModContent.GetInstance<FBAMod>();
-            CroppedTexture2D emptyTexture = new CroppedTexture2D(mod.GetTexture($"Textures/{sideText}{category.Name}"), 
+            CroppedTexture2D emptyTexture = new CroppedTexture2D(FBAMod.Instance.GetTexture($"Textures/{sideText}{category.Name}"), 
                                                                  CustomItemSlot.DefaultColors.EmptyTexture);
 
             Slot = new CustomItemSlot(ItemSlot.Context.EquipAccessory)
@@ -67,6 +63,11 @@ namespace FullBodyAccessories.UI
                 IsValidItem = item => item.dye > 0
             };
 
+
+            Slots = new CustomItemSlot[3];
+            Slots[(int) SlotId.Equip] = Slot;
+            Slots[(int) SlotId.Social] = SocialSlot;
+            Slots[(int) SlotId.Dye] = DyeSlot;
 
             Slot.Left.Set(x, 0);
             SocialSlot.Left.Set(x, 0);
@@ -97,11 +98,20 @@ namespace FullBodyAccessories.UI
             Slot.ItemVisible = tag.GetBool(VisibleTag);
         }
 
-        private string GetTagPrefix()
-        {
-            string side = Side == PanelSide.None ? "" : Side.ToString();
+        private string TagPrefix => $"{(Side == PanelSide.None ? "" : Side.ToString())}{Category.Name}";
 
-            return $"{side}{Category.Name}";
-        }
+
+        private string VisibleTag => $"{TagPrefix}Visible";
+        private string ItemTag => $"{TagPrefix}Item";
+        private string SocialTag => $"{TagPrefix}Social";
+        private string DyeTag => $"{TagPrefix}Dye";
+
+        public Category Category { get; }
+        public CustomItemSlot Slot { get; }
+        public CustomItemSlot SocialSlot { get; }
+        public CustomItemSlot DyeSlot { get; }
+        public CustomItemSlot[] Slots { get; }
+
+        public PanelSide Side { get; }
     }
 }

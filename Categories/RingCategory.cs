@@ -1,4 +1,5 @@
-﻿using static Terraria.ID.ItemID;
+﻿using Terraria.ID;
+using static Terraria.ID.ItemID;
 
 namespace FullBodyAccessories.Categories
 {
@@ -8,6 +9,10 @@ namespace FullBodyAccessories.Categories
         {
             Register(CoinRing, DiamondRing, GoldRing, GreedyRing);
             Register(FleshKnuckles);
+
+            Register(BandofRegeneration, BandofStarpower);
+            Register(CharmofMyths);
+            Register(ManaRegenerationBand);
         }
     }
 }

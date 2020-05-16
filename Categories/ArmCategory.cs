@@ -11,9 +11,9 @@ namespace FullBodyAccessories.Categories
                      BlizzardinaBalloon, BlueHorseshoeBalloon, BundleofBalloons, CloudinaBalloon, FartInABalloon,
                      HoneyBalloon, PartyBundleOfBalloonsAccessory, SandstorminaBalloon, SharkronBalloon,
                      ShinyRedBalloon, WhiteHorseshoeBalloon, YellowHorseshoeBalloon);
-            Register(BandofRegeneration, BandofStarpower, ManaRegenerationBand);
+            // Register(BandofRegeneration, BandofStarpower, ManaRegenerationBand);
             Register(CelestialCuffs, MagicCuffs);
-            Register(CharmofMyths);
+            // Register(CharmofMyths);
             Register(ClimbingClaws);
             Register(FeralClaws, FireGauntlet, HandWarmer, MechanicalGlove, PowerGlove, TitanGlove, YoYoGlove);
             Register(LavaCharm);

@@ -11,8 +11,6 @@
     <Exec Command="&quot;$(tMLBuildServerPath)&quot; -build $(ProjectDir) -eac $(TargetPath) -define $(DefineConstants) -unsafe $(AllowUnsafeBlocks)" />
   </Target>
   <ItemGroup>
-    <Reference Include="WebmilioCommons">
-      <HintPath>..\WebmilioCommons-Releases\WebmilioCommons.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\WebmilioCommons\WebmilioCommons.csproj" />
   </ItemGroup>
 </Project>

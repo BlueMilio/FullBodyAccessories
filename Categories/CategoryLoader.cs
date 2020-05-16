@@ -8,7 +8,7 @@ namespace FullBodyAccessories.Categories
 {
     public sealed class CategoryLoader : SingletonLoader<CategoryLoader, Category>
     {
-        private readonly Dictionary<string, Category> _categoryNames = new Dictionary<string, Category>(new CategoryNameEqualityComparer());
+        private readonly Dictionary<string, Category> _categoryNames = new Dictionary<string, Category>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<int, Category> _itemCategories = new Dictionary<int, Category>();
 
 
@@ -41,13 +41,5 @@ namespace FullBodyAccessories.Categories
 
 
         public bool HasCategory(string categoryName) => _categoryNames.ContainsKey(categoryName);
-
-
-        private class CategoryNameEqualityComparer : IEqualityComparer<string>
-        {
-            public bool Equals(string x, string y) => x.Equals(y, StringComparison.CurrentCultureIgnoreCase);
-
-            public int GetHashCode(string obj) => obj.GetHashCode();
-        }
     }
 }
